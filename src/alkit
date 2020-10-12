@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+
+declare -r alkit_version='master'
+declare -r alkit_cmddir="$(dirname $(realpath ${BASH_SOURCE[0]}))/cmd"
+declare -r alkit_command="$1"
+declare -r alkit_template="$2"
+declare -r alkit_cmdfile="${alkit_cmddir}/${alkit_command}.sh"
+
+source "$alkit_cmddir/.lib.sh"
+
+ExitIfEmpty "$alkit_command" <<-EOU
+	alkit ${alkit_version}
+	manage system from template
+	usage:
+	   alkit <command> <arguments>
+	commands:
+	   status   show status of template files in system
+	   diff     show difference of template files in system
+	   pull     pull template files from system
+	   push     push template files to system
+	   zap      partition and format disk according to etc/fstab
+	   mount    mount disk according to etc/fstab
+	   strap    pacstrap system according to .alkit
+	   clone    shortcut to run zap, mount and strap
+EOU
+
+ExitIfNotExist "$alkit_cmdfile" <<-EOU
+	alkit command '$alkit_command' not found
+EOU
+
+SourceIfExist "$alkit_template/.alkit"
+
+shift
+CallIfExist "before_$alkit_command" $@
+CallIfExist $alkit_command $@ || source "$alkit_cmdfile" $@
+CallIfExist "after_$alkit_command" $@

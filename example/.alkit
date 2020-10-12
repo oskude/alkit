@@ -1,0 +1,4 @@
+after_strap(){
+	system="$2"
+	AskRun arch-chroot $system passwd
+}

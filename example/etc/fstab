@@ -1,0 +1,2 @@
+PARTLABEL=EXAMPLE_BOOT /boot vfat rw,noatime 1
+PARTLABEL=EXAMPLE_ROOT /     ext4 rw,noatime 0
