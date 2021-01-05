@@ -1,5 +1,7 @@
 # `alkit`
 
+> **PLEASE DO NOT USE THIS (FOR NOW)** it has some ugly bugs and i have no time to fix them here...
+
 given that we have this wonderful "everything is a file" thing, i sure do wanna have my (hobby desktop) system - _or rather, only the files i need/want_ - also in git! but managing .git in / was not so fun. so what if we took the "git workflow" and applied it to just syncing two directories, a template and the system. add some helpers and bang! [kiss](example/readme.md)?
 
 > **WARNING: this is some dangerous(powerful) ~~sh~~script, so please do not run on a system you cannot easily restore/forget. cause i would feel really bad if my code broke your system, mmmkay.**
